@@ -17,13 +17,13 @@ private:
     int prev_buffer_sbus;
     int buffer_sbus;
     int rx_index;
-    int data_rx[25];
-    int data_tx[25];
+    uint8_t data_rx[25];
+    uint8_t data_tx[25];
     int current_millis;
     int previous_millis;
     
 public:
-    int data[16];
+    uint16_t data[16];
     bool frame_lost;
     bool failsafe;
 
