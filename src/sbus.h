@@ -2,6 +2,23 @@
 #define SBUS_H
 #include <Arduino.h>
 
+#define AILERON 0
+#define ELEVATOR 1
+#define THROTTLE 2
+#define RUDDER 3
+#define AUX1 4
+#define AUX2 5
+#define AUX3 6
+#define AUX4 7
+#define AUX5 8
+#define AUX6 9
+#define AUX7 10
+#define AUX8 11
+#define AUX9 12
+#define AUX10 13
+#define AUX11 14
+#define AUX12 15
+
 #define HEADER_SBUS 0X0F
 #define FOOTER_SBUS 0X00
 #define BAUDRATE_SBUS 100000
