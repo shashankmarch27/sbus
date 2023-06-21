@@ -1,15 +1,13 @@
 #include "sbus.h"
 
-sbus::sbus(SerialUART *port, int tx, int rx){
+sbus::sbus(HardwareSerial *port, int tx, int rx){
     sbus_port = port;
     tx_pin = tx;
     rx_pin = rx;
 }
 
 void sbus::init(){
-    sbus_port->setTX(tx_pin);
-    sbus_port->setRX(rx_pin);
-    sbus_port->begin(BAUDRATE_SBUS,SERIAL_8E2);
+    sbus_port->begin(BAUDRATE_SBUS,SERIAL_8E2,rx_pin,tx_pin);
 }
 
 void sbus::read(){

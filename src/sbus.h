@@ -28,7 +28,7 @@ class sbus{
 private:
     int tx_pin;
     int rx_pin;
-    SerialUART *sbus_port;
+    HardwareSerial *sbus_port;
 
     bool header_detected_sbus = false;
     int prev_buffer_sbus;
@@ -44,7 +44,7 @@ public:
     bool frame_lost;
     bool failsafe;
 
-    sbus(SerialUART *port, int tx = 4, int rx = 5);
+    sbus(HardwareSerial *port, int tx, int rx);
 
     void init();
     void read();
