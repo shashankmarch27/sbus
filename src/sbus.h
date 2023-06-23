@@ -28,7 +28,13 @@ class sbus{
 private:
     int tx_pin;
     int rx_pin;
+
+    #ifdef ESP32
+    HardwareSerial *sbus_port;
+
+    #elif defined(ARDUINO_ARCH_RP2040)
     SerialUART *sbus_port;
+    #endif
 
     bool header_detected_sbus = false;
     int prev_buffer_sbus;
@@ -44,7 +50,11 @@ public:
     bool frame_lost;
     bool failsafe;
 
-    sbus(SerialUART *port, int tx = 4, int rx = 5);
+    #ifdef ESP32
+    sbus(HardwareSerial *port, int tx, int rx);
+    #elif defined(ARDUINO_ARCH_RP204)
+    sbus(HardwareSerial *port, int tx, int rx);
+    #endif
 
     void init();
     void read();
