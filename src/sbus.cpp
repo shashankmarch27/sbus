@@ -20,7 +20,7 @@ sbus::sbus(SerialUART *port, int tx, int rx){
 
 void sbus::init(){
     sbus_port->setTX(tx_pin);
-    subs_port->SetRX(rx_pin);
+    sbus_port->setRX(rx_pin);
     sbus_port->begin(BAUDRATE_SBUS,SERIAL_8E2);
 }
 #endif

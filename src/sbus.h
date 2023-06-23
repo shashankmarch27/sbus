@@ -52,8 +52,8 @@ public:
 
     #ifdef ESP32
     sbus(HardwareSerial *port, int tx, int rx);
-    #elif defined(ARDUINO_ARCH_RP204)
-    sbus(HardwareSerial *port, int tx, int rx);
+    #elif defined(ARDUINO_ARCH_RP2040)
+    sbus(SerialUART *port, int tx = 0, int rx = 1);
     #endif
 
     void init();
