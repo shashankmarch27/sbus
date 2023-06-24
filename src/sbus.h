@@ -36,6 +36,7 @@ private:
     SerialUART *sbus_port;
     #endif
 
+    bool inverted;
     bool header_detected_sbus = false;
     int prev_buffer_sbus;
     int buffer_sbus;
@@ -51,9 +52,9 @@ public:
     bool failsafe;
 
     #ifdef ESP32
-    sbus(HardwareSerial *port, int tx, int rx);
+    sbus(HardwareSerial *port, int rx, int tx, bool invert = true);
     #elif defined(ARDUINO_ARCH_RP2040)
-    sbus(SerialUART *port, int tx = 0, int rx = 1);
+    sbus(SerialUART *port, int rx = 0, int tx = 1);
     #endif
 
     void init();

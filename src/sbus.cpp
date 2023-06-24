@@ -1,18 +1,19 @@
 #include "sbus.h"
 
 #ifdef ESP32
-sbus::sbus(HardwareSerial *port, int tx, int rx){
+sbus::sbus(HardwareSerial *port, int rx, int tx, bool invert){
+    inverted = invert;
     sbus_port = port;
     tx_pin = tx;
     rx_pin = rx;
 }
 
 void sbus::init(){
-    sbus_port->begin(BAUDRATE_SBUS,SERIAL_8E2,rx_pin,tx_pin);
+    sbus_port->begin(BAUDRATE_SBUS,SERIAL_8E2,rx_pin,tx_pin,inverted);
 }
 
 #elif defined(ARDUINO_ARCH_RP2040)
-sbus::sbus(SerialUART *port, int tx, int rx){
+sbus::sbus(SerialUART *port, int rx, int tx){
     sbus_port = port;
     tx_pin = tx;
     rx_pin = rx;
