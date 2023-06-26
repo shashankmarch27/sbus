@@ -26,7 +26,7 @@ void sbus::init(){
 }
 #endif
 
-void sbus::read(){
+packet* sbus::read(){
     while(sbus_port->available()){
         prev_buffer_sbus = buffer_sbus;
         buffer_sbus = sbus_port->read();
@@ -65,7 +65,25 @@ void sbus::read(){
     data[15] = ((data_rx[21] >> 5) | (data_rx[22] << 3)) & 0x07FF;
     frame_lost = (data_rx[23] & 0x04) >> 2;
     failsafe = (data_rx[23] & 0x08) >> 3;
+
+    data_packet_time.aileron = map(data[AILERON],172,1811,988,2011);
+    data_packet_time.elevator = map(data[ELEVATOR],172,1811,988,2011);
+    data_packet_time.throttle = map(data[THROTTLE],172,1811,988,2011);
+    data_packet_time.rudder = map(data[RUDDER],172,1811,988,2011);
+    data_packet_time.aux1 = map(data[AUX1],172,1811,988,2011);
+    data_packet_time.aux2 = map(data[AUX2],172,1811,988,2011);
+    data_packet_time.aux3 = map(data[AUX3],172,1811,988,2011);
+    data_packet_time.aux4 = map(data[AUX4],172,1811,988,2011);
+    data_packet_time.aux5 = map(data[AUX5],172,1811,988,2011);
+    data_packet_time.aux6 = map(data[AUX6],172,1811,988,2011);
+    data_packet_time.aux7 = map(data[AUX7],172,1811,988,2011);
+    data_packet_time.aux8 = map(data[AUX8],172,1811,988,2011);
+    data_packet_time.aux9 = map(data[AUX9],172,1811,988,2011);
+    data_packet_time.aux10 = map(data[AUX10],172,1811,988,2011);
+    data_packet_time.aux11 = map(data[AUX11],172,1811,988,2011);
+    data_packet_time.aux12 = map(data[AUX12],172,1811,988,2011);
     }
+    return &data_packet_time;
 }
 
 void sbus::write(){
