@@ -19,9 +19,29 @@ sbus::sbus(SerialUART *port, int rx, int tx){
     rx_pin = rx;
 }
 
+sbus::sbus(SerialUART *port, int rx){
+    sbus_port = port;
+    rx_pin = rx;
+}
+
+sbus::sbus(SerialUART *port, int tx){
+    sbus_port = port;
+    tx_pin = tx;
+}
+
 void sbus::init(){
     sbus_port->setTX(tx_pin);
     sbus_port->setRX(rx_pin);
+    sbus_port->begin(BAUDRATE_SBUS,SERIAL_8E2);
+}
+
+void sbus::initRx(){
+    sbus_port->setRX(rx_pin);
+    sbus_port->begin(BAUDRATE_SBUS,SERIAL_8E2);
+}
+
+void sbus::initTx(){
+    sbus_port->setTX(tx_pin);
     sbus_port->begin(BAUDRATE_SBUS,SERIAL_8E2);
 }
 #endif

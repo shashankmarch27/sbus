@@ -55,9 +55,13 @@ public:
     sbus(HardwareSerial *port, int rx, int tx, bool invert = true);
     #elif defined(ARDUINO_ARCH_RP2040)
     sbus(SerialUART *port, int rx = 1, int tx = 0);
+    sbus(SerialUART *port, int rx = 1);
+    sbus(SerialUART *port, int tx = 1);
     #endif
 
     void init();
+    void initRx();
+    void initTx();
     void read();
     void write();
 
