@@ -23,30 +23,6 @@
 #define FOOTER_SBUS 0X00
 #define BAUDRATE_SBUS 100000
 
-#ifndef PACKET_TYPE
-#define PACKET_TYPE
-struct packet{
-  uint16_t aileron = 1500;
-  uint16_t elevator = 1500;
-  uint16_t throttle = 1000;
-  uint16_t rudder = 1500;
-  uint16_t aux1 = 1000;
-  uint16_t aux2 = 1000;
-  uint16_t aux3 = 1000;
-  uint16_t aux4 = 1000;
-  uint16_t aux5 = 1000;
-  uint16_t aux6 = 1000;
-  uint16_t aux7 = 1000;
-  uint16_t aux8 = 1000;
-  uint16_t aux9 = 1000;
-  uint16_t aux10 = 1000;
-  uint16_t aux11 = 1000;
-  uint16_t aux12 = 1000;
-  uint16_t rssi = 0;
-
-};
-#endif
-
 class sbus{
 
 private:
@@ -71,10 +47,11 @@ private:
     int previous_millis;
     
 public:
-    uint16_t data[16];
-    packet data_packet_time;
-    bool frame_lost;
-    bool failsafe;
+    struct channel{
+    uint16_t channelValue[16];
+    uint16_t frame_lost;
+    uint16_t failsafe;
+    };
 
     #ifdef ESP32
     sbus(HardwareSerial *port, int rx, int tx, bool invert = true);
@@ -83,8 +60,8 @@ public:
     #endif
 
     void init();
-    packet* read();
-    void write();
+    void read(channel& data);
+    void write(channel& data);
 
 };
 
