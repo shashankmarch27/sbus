@@ -47,11 +47,11 @@ private:
     int previous_millis;
     
 public:
-    struct channel{
+    typedef struct sbusChannel_t{
     uint16_t channelValue[16];
-    uint16_t frame_lost;
-    uint16_t failsafe;
-    };
+    bool frame_lost;
+    bool failsafe;
+    }sbusChannel_t;
 
     #ifdef ESP32
     sbus(HardwareSerial *port, int rx, int tx, bool invert = true);
@@ -60,8 +60,8 @@ public:
     #endif
 
     void init();
-    void read(channel& data);
-    void write(channel& data);
+    void read(sbusChannel_t* data);
+    void write(sbusChannel_t* data);
 
 };
 
