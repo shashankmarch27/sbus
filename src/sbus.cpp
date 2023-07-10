@@ -1,11 +1,11 @@
 #include "sbus.h"
 
 #ifdef ESP32
-sbus::sbus(HardwareSerial *port, int rx, int tx, bool invert){
-    inverted = invert;
-    sbus_port = port;
-    tx_pin = tx;
-    rx_pin = rx;
+sbus::sbus(HardwareSerial *sbus_port, int rx_pin, int tx_pin, bool inverted){
+    this->inverted = inverted;
+    this->sbus_port = sbus_port;
+    this->tx_pin = tx_pin;
+    this->rx_pin = rx_pin;
 }
 
 void sbus::init(){
@@ -53,9 +53,5 @@ void sbus::read(sbuspacket_t* data){
 }
 
 void sbus::write(sbuspacket_t* data){
-    current_millis = millis();
-    if(current_millis - previous_millis > 10){
         sbus_port->write((char*)data,sizeof(*data));
-        previous_millis = current_millis;
-    }
 }

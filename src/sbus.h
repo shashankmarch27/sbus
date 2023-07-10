@@ -22,14 +22,11 @@ private:
     int buffer_sbus;
     int rx_index;
     uint8_t data_rx[25];
-    uint8_t data_tx[25];
-    int current_millis;
-    int previous_millis;
     
 public:
 
     #ifdef ESP32
-    sbus(HardwareSerial *port, int rx, int tx, bool invert = true);
+    sbus(HardwareSerial *sbus_port, int rx_pin, int tx_pin, bool inverted = true);
     #elif defined(ARDUINO_ARCH_RP2040)
     sbus(SerialUART *port, int rx = 1, int tx = 0);
     #endif
