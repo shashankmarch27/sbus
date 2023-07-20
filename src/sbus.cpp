@@ -48,6 +48,11 @@ void sbus::read(sbuspacket_t* data){
                 rx_index = 1;
             }
         }
+
+        if(rx_index == sizeof(data_rx)/sizeof(data_rx[0])){
+            rx_index = 0;
+            header_detected_sbus = false;
+        }
     }
     memcpy(data,data_rx,sizeof(*data));
 }
